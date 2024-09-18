@@ -2,22 +2,22 @@
 
 
 class Square:
-    '''Class that defines a square and the size of its sides'''
-    
+    """Class that defines a square with size validation."""
+
     def __init__(self, size=0):
-        '''
-        Initializes the square size to zero
+        """
+        Initializes the square with a given size.
 
         Args:
-            size (int): The size of the square.
-
+            size (int): The size of the square's sides. Defaults to 0.
+        
         Raises:
-            TypeError: If size isnt an integer.
-            ValueError: If size is less than zero. 
-        '''
+            TypeError: If size is not an integer.
+            ValueError: If size is less than 0.
+        """
         if not isinstance(size, int):
-        raise TypeError("size must be an integer")
+            raise TypeError("size must be an integer")
         if size < 0:
-        raise ValueError("size must be greater than 0")
-    
+            raise ValueError("size must be >= 0")
+        
         self.__size = size
