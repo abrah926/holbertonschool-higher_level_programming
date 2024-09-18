@@ -11,6 +11,6 @@ class Square:
 
     def __init__(self, size):
         '''
-        Initializes the square with a private size attr.
+        Initializes the square with a private size.
         '''
         self.__size = size
