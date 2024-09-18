@@ -21,4 +21,3 @@ class Square:
             size (int): The size of the square's sides.
         """
         self.__size = size
-    print()
