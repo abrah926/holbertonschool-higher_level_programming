@@ -14,3 +14,8 @@
 Traceback (most recent call last):
     ...
 TypeError: b must be an integer
+
+>>> add_integer(1e308, 1e308)
+# Depending on the implementation, expect:
+OverflowError: integer addition overflow
+
