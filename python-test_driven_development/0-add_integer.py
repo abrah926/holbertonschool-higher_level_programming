@@ -17,15 +17,20 @@ def add_integer(a, b=98):
 
     Raises:
         TypeError: If `a` or `b` are not integers or floats.
+        OverflowError: If the result is too large to be represented.
     """
     if not isinstance(a, (int, float)):
         raise TypeError("a must be an integer")
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
-    try:
-        result = add_integer(1e308, 1e308)
-    except OverflowError:
-        print("Overflow error occurred")
-
     
-    return int(a) + int(b)
+    # Convert to integer
+    a = int(a)
+    b = int(b)
+
+    # Perform the addition and handle potential overflow
+    result = a + b
+    if result == float('inf') or result == float('-inf'):
+        raise OverflowError("integer addition overflow")
+
+    return result
