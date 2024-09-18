@@ -1,13 +1,16 @@
->>> from 0-add_integer import add_integer
->>> add_integer(1, 2)
+>>> import importlib.util
+>>> spec = importlib.util.spec_from_file_location("add_integer", "./0-add_integer.py")
+>>> add_integer = importlib.util.module_from_spec(spec)
+>>> spec.loader.exec_module(add_integer)
+>>> add_integer.add_integer(1, 2)
 3
->>> add_integer(100, -2)
+>>> add_integer.add_integer(100, -2)
 98
->>> add_integer(2)
+>>> add_integer.add_integer(2)
 100
->>> add_integer(100.3, -2)
+>>> add_integer.add_integer(100.3, -2)
 98
->>> add_integer(4, "School")
+>>> add_integer.add_integer(4, "School")
 Traceback (most recent call last):
     ...
 TypeError: b must be an integer
