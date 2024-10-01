@@ -1,6 +1,12 @@
 #!/usr/bin/python3
 
 
+"""
+This module contains a function `read_file` that reads and prints
+the content of a UTF-8 encoded text file to stdout.
+"""
+
+
 def read_file(filename=""):
     """_summary_
 
