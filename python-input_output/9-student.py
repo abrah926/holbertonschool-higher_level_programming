@@ -6,10 +6,12 @@ This module defines the Student class.
 
 class Student:
     """
-    Defines a student with attributes first_name, last_name, and age.
+    Defines a student with attributes first_name,
+    last_name, and age.
 
     Methods:
-        to_json: Retrieves the dictionary representation of the Student instance.
+        to_json: Retrieves the dictionary representation
+        of the Student instance.
     """
 
     def __init__(self, first_name, last_name, age):
@@ -27,9 +29,11 @@ class Student:
 
     def to_json(self):
         """
-        Retrieves the dictionary representation of the Student instance.
+        Retrieves the dictionary representation
+        of the Student instance.
 
         Returns:
-            dict: The dictionary containing all the instance's attributes.
+            dict: The dictionary containing all the
+            instance's attributes.
         """
         return self.__dict__
