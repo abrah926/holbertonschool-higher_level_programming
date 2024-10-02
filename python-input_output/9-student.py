@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 class Student:
     """
     Defines a student with attributes first_name, last_name, and age.
@@ -23,7 +21,7 @@ class Student:
         self.age = age
 
     def to_json(self):
-          """
+        """
         Retrieves the dictionary representation of the Student instance.
 
         Returns:
