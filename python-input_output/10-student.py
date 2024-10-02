@@ -9,7 +9,8 @@ class Student:
     Defines a student with attributes first_name, last_name, and age.
 
     Methods:
-        to_json: Retrieves the dictionary representation of the Student instance.
+        to_json: Retrieves the dictionary representation
+        of the Student instance.
     """
 
     def __init__(self, first_name, last_name, age):
@@ -27,16 +28,20 @@ class Student:
 
     def to_json(self, attrs=None):
         """
-        Retrieves the dictionary representation of the Student instance.
+        Retrieves the dictionary representation
+        of the Student instance.
 
         Args:
-            attrs (list): A list of strings representing attribute names to retrieve.
+            attrs (list): A list of strings representing
+            attribute names to retrieve.
 
         Returns:
             dict: The dictionary containing the specified attributes.
                   If attrs is None, all attributes are returned.
         """
-        if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
-            return {key: value for key, value in self.__dict__.items() if key in attrs}
+        if isinstance(attrs, list) and all(isinstance(attr, str)
+                                           for attr in attrs):
+            return {key: value for key, value in self.__dict__.items()
+                    if key in attrs}
         else:
             return self.__dict__
