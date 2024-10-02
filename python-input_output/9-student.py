@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+This module defines the Student class.
+"""
+
+
 class Student:
     """
     Defines a student with attributes first_name, last_name, and age.
