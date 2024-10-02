@@ -17,14 +17,13 @@ class Student:
         Retrieves a dictionary representation of a Student instance
         If attrs is a list of strings, only retrieve those attributes
         """
-
         if isinstance(attrs, list) and all(isinstance(attr, str) for attr in attrs):
             return {key: value for key, value in self.__dict__.items() if key in attrs}
         return self.__dict__
 
-    def reload_from_json(self, json):
+    def reload_from_json(self, json_data):
         """
-      Replaces all attributes of the Student instance using the provided dictionary
-      """
-    for key, value in json.items():
-        setattr(self, key, value)
+        Replaces all attributes of the Student instance using the provided dictionary
+        """
+        for key, value in json_data.items():
+            setattr(self, key, value)
