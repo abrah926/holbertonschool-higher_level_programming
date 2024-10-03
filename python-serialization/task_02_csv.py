@@ -16,7 +16,11 @@ def convert_csv_to_json(csv_filename):
         with open(csv_filename, mode='r') as csv_file:
             csv_reader = csv.DictReader(csv_file)
 
-        data = [row for row in csv_reader]
+            data = [row for row in csv_reader]
+
+        if not data:
+            print("No data found in the CSV file.")
+            return False
 
         with open('data.json', mode='w') as json_file:
             json.dump(data, json_file, indent=4)
