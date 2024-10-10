@@ -21,13 +21,12 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             data = {"name": "John", "age": 30, "city": "New York"}
             self.wfile.write(json.dumps(data).encode())
 
-        # Adjust the /status response to match exactly what the test expects
+        # Ensure the /status response matches the test exactly
         elif parsed_path.path == '/status':
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            # Ensure the status response matches test output exactly
-            # Adjust if necessary based on test output
+            # Match exactly what the test expects
             status = {"status": "OK"}
             self.wfile.write(json.dumps(status).encode())
 
@@ -35,13 +34,12 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
             self.send_response(404)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            # Modify error message for undefined endpoints to match the expected output
-            # Adjust as needed based on test output
-            error_message = {"error": "Not Found"}
+            # Adjust to match expected message for undefined endpoints
+            error_message = {"message": "Not Found"}
             self.wfile.write(json.dumps(error_message).encode())
 
     def log_message(self, format, *args):
-        return
+        return  # Disable default logging to keep the output clean
 
 
 def run(server_class=http.server.HTTPServer, handler_class=SimpleHTTPRequestHandler):
