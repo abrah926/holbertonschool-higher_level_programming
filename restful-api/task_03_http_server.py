@@ -9,7 +9,8 @@ and returns responses based on the requested endpoint.
 Endpoints:
 - "/": Returns a simple text message.
 - "/data": Returns a JSON response with sample data.
-- "/status": Returns a JSON response with an OK status message.
+- "/status": Returns an OK status message.
+- "/info": Returns version and description of the API.
 - Default: Returns a 404 Not Found status for undefined endpoints.
 """
 
@@ -49,6 +50,14 @@ class SimpleHandler(http.server.BaseHTTPRequestHandler):
             response = {"status": "OK"}
             self.wfile.write(json.dumps(response).encode())
 
+        elif self.path == "/info":
+            self.send_response(200)
+            self.send_header("Content-type", "application/json")
+            self.end_headers()
+            response = {"version": "1.0",
+                        "description": "A simple API built with http.server"}
+            self.wfile.write(json.dumps(response).encode())
+
         else:
             self.send_response(404)
             self.send_header("Content-type", "text/plain")
@@ -56,6 +65,7 @@ class SimpleHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(b"Endpoint not found")
 
 
+# Initialize and start the server
 Handler = SimpleHandler
 
 with socketserver.TCPServer(("", PORT), Handler) as httpd:
