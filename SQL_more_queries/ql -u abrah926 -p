@@ -1,0 +1,13 @@
+[0;1;32m●[0m mysql.service - MySQL Community Server
+     Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Thu 2024-10-24 12:17:57 AST; 27s ago
+    Process: 90577 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+   Main PID: 90585 (mysqld)
+     Status: "Server is operational"
+      Tasks: 38 (limit: 9149)
+     Memory: 369.5M
+     CGroup: /system.slice/mysql.service
+             └─90585 /usr/sbin/mysqld
+
+oct 24 12:17:57 abrah926-ThinkBook-15-G2-ITL systemd[1]: Starting MySQL Community Server...
+oct 24 12:17:57 abrah926-ThinkBook-15-G2-ITL systemd[1]: Started MySQL Community Server.
