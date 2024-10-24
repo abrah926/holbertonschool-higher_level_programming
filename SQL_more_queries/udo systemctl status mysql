@@ -1,0 +1,12 @@
+● mysql.service - MySQL Community Server
+     Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
+     Active: activating (start) since Wed 2024-10-23 20:43:03 AST; 49s ago
+    Process: 57440 ExecStartPre=/usr/share/mysql/mysql-systemd-start pre (code=exited, status=0/SUCCESS)
+   Main PID: 57448 (mysqld)
+     Status: "Server startup in progress"
+      Tasks: 12 (limit: 9149)
+     Memory: 257.2M
+     CGroup: /system.slice/mysql.service
+             └─57448 /usr/sbin/mysqld
+
+oct 23 20:43:03 abrah926-ThinkBook-15-G2-ITL systemd[1]: Starting MySQL Community Server...
