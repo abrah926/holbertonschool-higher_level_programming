@@ -8,39 +8,35 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Retrieve MySQL credentials and database name from arguments
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
-    db_name = sys.argv[3]
+    # Ensure correct number of arguments
+    if len(sys.argv) != 4:
+        print("Usage: ./4-cities_by_state.py <mysql_username> <mysql_password> <database_name>")
+        sys.exit(1)
+
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
     # Connect to the MySQL database
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=mysql_username,
-        passwd=mysql_password,
-        db=db_name
+        user=username,
+        passwd=password,
+        db=database
     )
 
-    # Create a cursor object to execute SQL queries
-    cursor = db.cursor()
+    cur = db.cursor()
+    query = """SELECT cities.id, cities.name, states.name
+                FROM states
+                INNER JOIN cities
+                ON states.id = cities.state_id
+                ORDER BY cities.id ASC"""
+    cur.execute(query)
 
-    # Single execute statement to fetch cities and their corresponding states
-    query = """
-    SELECT cities.id, cities.name, states.name
-    FROM cities
-    JOIN states ON cities.state_id = states.id
-    ORDER BY cities.id ASC
-    """
-
-    # Execute the query
-    cursor.execute(query)
-
-    # Fetch and print each row in the result set
-    rows = cursor.fetchall()
+    rows = cur.fetchall()
     for row in rows:
-        print(row)
+        print(row[1], row[2])  # Printing city name and state name
 
-    # Close the cursor and the database connection
-    cursor.close()
+    cur.close()
     db.close()
