@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 
 """
-Script that lists all cities of a specified state from the database hbtn_0e_4_usa.
+Script that takes in the name of a state
+as an argument and lists all cities of that state
+from the database hbtn_0e_4_usa.
 """
 
 import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Check if the correct number of arguments is provided
+    # Ensure the correct number of arguments is provided
     if len(sys.argv) != 5:
         print("Usage: ./5-filter_cities.py <mysql_username> <mysql_password> <database_name> <state_name>")
         sys.exit(1)
@@ -29,23 +31,18 @@ if __name__ == "__main__":
 
     cur = db.cursor()
 
-    # Using a parameterized query to prevent SQL injection
+    # Parameterized query to prevent SQL injection
     query = """SELECT cities.name
-                FROM cities
-                INNER JOIN states ON cities.state_id = states.id
+                FROM states
+                INNER JOIN cities ON states.id = cities.state_id
                 WHERE states.name = %s
                 ORDER BY cities.id ASC"""
-
-    # Execute the query with the state name parameter
     cur.execute(query, (state_name,))
 
+    # Fetch and print results
     rows = cur.fetchall()
+    print(", ".join([row[0] for row in rows]))
 
-    # Extract city names from the result set
-    city_names = [row[0] for row in rows]
-
-    # Print the city names, joined by a comma
-    print(", ".join(city_names))
-
+    # Cleanup
     cur.close()
     db.close()
