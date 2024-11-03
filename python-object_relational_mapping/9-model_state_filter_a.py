@@ -32,6 +32,8 @@ def main():
     for state in states_with_a:
         print(f"{state.id}: {state.name}")
 
+    session.close()
+
 
 if __name__ == "__main__":
     main()
