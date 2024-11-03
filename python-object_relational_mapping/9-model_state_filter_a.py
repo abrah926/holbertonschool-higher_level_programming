@@ -27,10 +27,10 @@ def main():
     session = Session()
 
     states_with_a = session.query(State).filter(
-        State.name.contains('a')).order_by(State.id.asc()).all()
+        State.name.like('%a%')).order_by(State.id).all()
 
     for state in states_with_a:
-        print(state.id, state.name)
+        print(f"{state.id}: {state.name}")
 
 
 if __name__ == "__main__":
