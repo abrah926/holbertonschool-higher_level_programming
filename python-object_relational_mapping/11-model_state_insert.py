@@ -30,3 +30,6 @@ session.commit()
 session.close()
 
 print(new_state.id)
+
+if __name__ == "__main__":
+    pass
