@@ -3,11 +3,11 @@ import os
 
 def generate_invitations(template, attendees):
     if not isinstance(template, str):
-        raise ValueError("Template must be a string")
+        print("Error: Template must be a string")
         return
 
     if not isinstance(attendees, list) or not all(isinstance(att, dict) for att in attendees):
-        raise ValueError("Attendees must be a list of dictionaries")
+        print("Error: Attendees must be a list of dictionaries")
         return
 
     if not template.strip():
@@ -29,6 +29,9 @@ def generate_invitations(template, attendees):
             "{event_location}", attendee.get("event_location", "N/A"))
 
         output_filename = f"output_{idx}.txt"
+
+        if os.path.exists("output"):
+            print(f"Warning: Output file already exists and will be overwritten")
 
         try:
             with open(output_filename, "w") as file:
