@@ -67,24 +67,26 @@ def products():
     source = request.args.get('source')
     product_id = request.args.get('product_id')
 
+    # Check if the source is valid
+    if source not in ['json', 'csv']:
+        return render_template('error.html', message="Wrong source. Please use json or csv."), 400
+
     products_data = []
 
     if source == 'json':
-        products_data = read_json_data()
-        if not products_data:
-            return render_template('product_display.html', error="JSON file not found or is empty.")
+        try:
+            products_data = read_json_data()
+        except FileNotFoundError:
+            abort(404, description='json file not found')
     elif source == 'csv':
-        products_data = read_csv_data()
-        if not products_data:
-            return render_template('product_display.html', error="CSV file not found or is empty.")
-    else:
-        return render_template('product_display.html', error="Invalid source parameter. Please use json or csv.")
+        try:
+            products_data = read_csv_data()
+        except FileNotFoundError:
+            abort(404, description='csv file not found')
 
     if product_id:
         products_data = [product for product in products_data if str(
             product.get('id')) == product_id]
-        if not products_data:
-            return render_template('product_display.html', error="Product not found.")
 
     return render_template('product_display.html', products=products_data)
 
