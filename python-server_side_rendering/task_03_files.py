@@ -57,23 +57,15 @@ def display_products():
     source = request.args.get('source')
     product_id = request.args.get('id')
 
-    # Handle invalid source
-    if source not in ['json', 'csv']:
-        # Return 400 status code
-        return render_template('product_display.html', error="Wrong source. Please use json or csv."), 400
-
-    # Read products based on source
     if source == 'json':
         products = read_json_file('products.json')
 
     elif source == 'csv':
         products = read_csv_file('products.csv')
 
-    # Handle missing products
-    if not products:
-        return render_template('product_display.html', error="No products found.")
+    else:
+        return render_template('product_display.html', error="Wrong source")
 
-    # If product_id is provided, filter the products
     if product_id:
         products = [product for product in products if str(
             product['id']) == str(product_id)]
