@@ -22,9 +22,7 @@ def contact():
 
 @app.route('/items')
 def items():
-    with open('items.json', 'r') as file:
-        items = json.load(file)
-    return render_template('items.html', items=items)
+    return render_template('items.html')
 
 
 if __name__ == '__main__':
