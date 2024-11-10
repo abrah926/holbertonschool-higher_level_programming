@@ -14,12 +14,10 @@ csv_file_path = os.path.join(os.path.dirname(__file__), 'products.csv')
 def read_json_data():
     try:
         with open(json_file_path, 'r') as file:
-            data = json.load(file)  # The data is a list of products
-            return data  # Directly return the list of products
+            data = json.load(file)
+            return data
     except FileNotFoundError:
         return None
-
-# Function to read data from CSV file
 
 
 def read_csv_data():
@@ -28,8 +26,7 @@ def read_csv_data():
             reader = csv.DictReader(file)
             products = []
             for row in reader:
-                # Convert 'id' to integer and 'price' to float
-                row['id'] = int(row['id'])
+                row['id'] = int(row['id'])  # Ensure type conversion
                 row['price'] = float(row['price'])
                 products.append(row)
             return products
@@ -73,21 +70,21 @@ def products():
     products_data = []
 
     if source == 'json':
-        try:
-            products_data = read_json_data()
-        except FileNotFoundError:
-            abort(404, description='json file not found')
+        products_data = read_json_data()
+        if not products_data:
+            return render_template('product_display.html', error="JSON file not found or is empty.")
     elif source == 'csv':
-        try:
-            products_data = read_csv_data()
-        except FileNotFoundError:
-            abort(404, description='csv file not found')
+        products_data = read_csv_data()
+        if not products_data:
+            return render_template('product_display.html', error="CSV file not found or is empty.")
     else:
-        return 'Invalid source parameter. Please use json or csv.', 400
+        return render_template('product_display.html', error="Invalid source parameter. Please use json or csv.")
 
     if product_id:
         products_data = [product for product in products_data if str(
             product.get('id')) == product_id]
+        if not products_data:
+            return render_template('product_display.html', error="Product not found.")
 
     return render_template('product_display.html', products=products_data)
 
