@@ -1,3 +1,4 @@
+#!/python3/usr/bin/
 SELECT name
 FROM tv_genres
 WHERE
