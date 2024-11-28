@@ -1,21 +1,79 @@
->>> import importlib.util
->>> spec = importlib.util.spec_from_file_location("add_integer", "./0-add_integer.py")
->>> add_integer = importlib.util.module_from_spec(spec)
->>> spec.loader.exec_module(add_integer)
->>> add_integer.add_integer(1, 2)
-3
->>> add_integer.add_integer(100, -2)
-98
->>> add_integer.add_integer(2)
-100
->>> add_integer.add_integer(100.3, -2)
-98
->>> add_integer.add_integer(4, "School")
-Traceback (most recent call last):
+# 0-add_integer.txt
+
+===========================
+How to Use 0-add_integer.py
+===========================
+
+This module defines an integer addition function ``add_integer(a, b=98)``.
+
+Usage
+=====
+
+``add_integer(...)``` returns the addition of its two arguments. For numbers,
+that value is equivalent to using the ``+`` operator.
+
+::
+
+    >>> add_integer = __import__('0-add_integer').add_integer
+    >>> add_integer(1, 2)
+    3
+
+::
+
+    >>> add_integer(100, -2)
+    98
+
+The function also works with floating-point values.
+
+::
+
+    >>> add_integer(2.0, 3.0)
+    5
+
+Note that floats are casted to ints before addition is performed.
+
+::
+
+    >>> add_integer(100.3, -2)
+    98
+
+The second argument is optional - by default, it is 98.
+
+::
+
+    >>> add_integer(2)
+    100
+
+Non-Numbers
+===========
+
+``add_integer()`` expects that both arguments are either integers or floats.
+If either argument is a non-integer and non-float, a TypeError is raised:
+
+::
+
+    >>> add_integer(4, "School")
+    Traceback (most recent call last):
+    TypeError: b must be an integer
+
+::
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+::
+
+    >>> add_integer("Hello", "World")
+    Traceback (most recent call last):
+    TypeError: a must be an integer
+
+    >>> add_integer(float('inf'))
+    Traceback (most recent call last):
     ...
-TypeError: b must be an integer
+    OverflowError: cannot convert float infinity to integer
 
->>> add_integer(1e308, 1e308)
-# Depending on the implementation, expect:
-OverflowError: integer addition overflow
-
+    >>> add_integer(2, float('nan'))
+    Traceback (most recent call last):
+    ...
+    ValueError: cannot convert float NaN to integer
