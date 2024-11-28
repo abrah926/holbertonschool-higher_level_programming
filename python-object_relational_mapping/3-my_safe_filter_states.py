@@ -1,31 +1,26 @@
 #!/usr/bin/python3
 
 """
-Script that takes in arguments and displays all values
-in the states table of the database where name matches the argument
-but this time is safe from SQL injection.
+ SQL injection safe script that takes in an argument and displays all values
 """
 
-import MySQLdb
 import sys
+import MySQLdb
 
 if __name__ == "__main__":
-
     db = MySQLdb.connect(
         host="localhost",
-        port=3306,
         user=sys.argv[1],
         passwd=sys.argv[2],
-        db=sys.argv[3]
+        db=sys.argv[3],
+        port=3306
     )
-
-    cur = db.cursor()
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cur.execute(query, (sys.argv[4],))
-
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
-
-    cur.close()
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM states WHERE name = %s \
+        ORDER BY id ASC", (sys.argv[4],))
+    states = cursor.fetchall()
+    for state in states:
+        if state[1] == sys.argv[4]:
+            print(state)
+    cursor.close()
     db.close()
